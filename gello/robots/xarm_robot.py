@@ -123,19 +123,19 @@ class XArmRobot(Robot):
     DEFAULT_MAX_DELTA = 0.05
 
     def num_dofs(self) -> int:
-        return 8
+        return 7
 
     def get_joint_state(self) -> np.ndarray:
         state = self.get_state()
         gripper = state.gripper_pos()
-        all_dofs = np.concatenate([state.joints(), np.array([gripper])])
+        all_dofs = np.concatenate([state.joints()])
         return all_dofs
 
     def command_joint_state(self, joint_state: np.ndarray) -> None:
         if len(joint_state) == 7:
             self.set_command(joint_state, None)
         elif len(joint_state) == 8:
-            self.set_command(joint_state[:7], joint_state[7])
+            self.set_command(joint_state[:7], None)
         else:
             raise ValueError(
                 f"Invalid joint state: {joint_state}, len={len(joint_state)}"
@@ -175,7 +175,7 @@ class XArmRobot(Robot):
         self.last_state = self._update_last_state()
         self.target_command = {
             "joints": self.last_state.joints(),
-            "gripper": 0,
+            # "gripper": 0,
         }
         self.running = True
         self.command_thread = None
@@ -191,7 +191,7 @@ class XArmRobot(Robot):
         with self.target_command_lock:
             self.target_command = {
                 "joints": joints,
-                "gripper": gripper,
+                # "gripper": gripper,
             }
 
     def _clear_error_states(self):
@@ -206,13 +206,13 @@ class XArmRobot(Robot):
         self.robot.set_collision_sensitivity(0)
         time.sleep(1)
         self.robot.set_state(state=0)
-        time.sleep(1)
-        self.robot.set_gripper_enable(True)
-        time.sleep(1)
-        self.robot.set_gripper_mode(0)
-        time.sleep(1)
-        self.robot.set_gripper_speed(3000)
-        time.sleep(1)
+        # time.sleep(1)
+        # self.robot.set_gripper_enable(True)
+        # time.sleep(1)
+        # self.robot.set_gripper_mode(0)
+        # time.sleep(1)
+        # self.robot.set_gripper_speed(3000)
+        # time.sleep(1)
 
     def _get_gripper_pos(self) -> float:
         if self.robot is None:
@@ -231,9 +231,10 @@ class XArmRobot(Robot):
         return normalized_gripper_pos
 
     def _set_gripper_position(self, pos: int) -> None:
-        if self.robot is None:
-            return
-        self.robot.set_gripper_position(pos, wait=False)
+        return
+        # if self.robot is None:
+        #     return
+        # self.robot.set_gripper_position(pos, wait=False)
         # while self.robot.get_is_moving():
         #     time.sleep(0.01)
 
@@ -252,7 +253,7 @@ class XArmRobot(Robot):
                 joint_delta = np.array(
                     self.target_command["joints"] - self.last_state.joints()
                 )
-                gripper_command = self.target_command["gripper"]
+                # gripper_command = self.target_command["gripper"]
 
             norm = np.linalg.norm(joint_delta)
 
@@ -267,12 +268,12 @@ class XArmRobot(Robot):
                 self.last_state.joints() + delta,
             )
 
-            if gripper_command is not None:
-                set_point = gripper_command
-                self._set_gripper_position(
-                    self.GRIPPER_OPEN
-                    + set_point * (self.GRIPPER_CLOSE - self.GRIPPER_OPEN)
-                )
+            # if gripper_command is not None:
+            #     set_point = gripper_command
+            #     self._set_gripper_position(
+            #         self.GRIPPER_OPEN
+            #         + set_point * (self.GRIPPER_CLOSE - self.GRIPPER_OPEN)
+            #     )
             self.last_state = self._update_last_state()
 
             rate.sleep()
@@ -292,7 +293,8 @@ class XArmRobot(Robot):
             if self.robot is None:
                 return RobotState(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, np.zeros(3))
 
-            gripper_pos = self._get_gripper_pos()
+            # gripper_pos = self._get_gripper_pos()
+            gripper_pos = 0
 
             code, servo_angle = self.robot.get_servo_angle(is_radian=True)
             while code != 0:

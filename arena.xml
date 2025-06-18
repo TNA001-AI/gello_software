@@ -1,0 +1,96 @@
+<mujoco model="unnamed_model">
+  <compiler autolimits="true" angle="radian"/>
+  <option integrator="implicitfast"/>
+  <default>
+    <default class="/"/>
+    <default class="xarm7 nohand/">
+      <default class="xarm7 nohand/xarm7">
+        <joint axis="0 0 1" range="-6.2831900000000003 6.2831900000000003" frictionloss="1"/>
+        <geom type="mesh" material="xarm7 nohand/white"/>
+        <site group="4" rgba="1 0 0 1" size="0.001"/>
+        <general ctrlrange="-6.2831900000000003 6.2831900000000003" biastype="affine"/>
+        <default class="xarm7 nohand/size1">
+          <joint damping="10"/>
+          <general forcerange="-50 50" gainprm="1500" biasprm="0 -1500 -150"/>
+        </default>
+        <default class="xarm7 nohand/size2">
+          <joint damping="5"/>
+          <general forcerange="-30 30" gainprm="1000" biasprm="0 -1000 -100"/>
+        </default>
+        <default class="xarm7 nohand/size3">
+          <joint damping="2"/>
+          <general forcerange="-20 20" gainprm="800" biasprm="0 -800 -80"/>
+        </default>
+      </default>
+    </default>
+  </default>
+  <asset>
+    <material name="xarm7 nohand/white" class="xarm7 nohand/" rgba="1 1 1 1"/>
+    <material name="xarm7 nohand/gray" class="xarm7 nohand/" rgba="0.753 0.753 0.753 1"/>
+    <mesh name="xarm7 nohand/link_base" class="xarm7 nohand/" file="link_base-326716fd166303be5d972b206c68a282b6006a86.stl"/>
+    <mesh name="xarm7 nohand/link1" class="xarm7 nohand/" file="link1-9b13f10e5f4c25ab051800a8d5bde3cea05ded98.stl"/>
+    <mesh name="xarm7 nohand/link2" class="xarm7 nohand/" file="link2-688558c30b2d2faecc0dd89685e623e369444249.stl"/>
+    <mesh name="xarm7 nohand/link3" class="xarm7 nohand/" file="link3-388d73ad9c06cfccfa0ca147aaf171d7f9b65760.stl"/>
+    <mesh name="xarm7 nohand/link4" class="xarm7 nohand/" file="link4-19912b7722a8f0f328a0aa93dcbd55decc748d67.stl"/>
+    <mesh name="xarm7 nohand/link5" class="xarm7 nohand/" file="link5-0b51f5731ec0b616afafdb5b5a80e6d0e802cac2.stl"/>
+    <mesh name="xarm7 nohand/link6" class="xarm7 nohand/" file="link6-f60892290819fe0d8cf4cf06eef4b6b1d358d5d6.stl"/>
+    <mesh name="xarm7 nohand/link7" class="xarm7 nohand/" file="link7-59356a861ea3cc51a1160063a8b2ab142523a9e3.stl"/>
+    <mesh name="xarm7 nohand/end_tool" class="xarm7 nohand/" file="end_tool-fba88989e12d718c4e6776399e40b7df4c85f363.stl"/>
+  </asset>
+  <worldbody>
+    <body name="xarm7 nohand/">
+      <body name="xarm7 nohand/link_base" childclass="xarm7 nohand/xarm7" pos="0 0 0.12">
+        <inertial pos="-0.021131 -0.0016302000000000001 0.056487999999999997" quat="0.69684299999999999 0.20175999999999999 0.10388 0.68037599999999998" mass="0.88556000000000001" diaginertia="0.00382023 0.0033528199999999998 0.0016772499999999999"/>
+        <geom name="xarm7 nohand//unnamed_geom_0" mesh="xarm7 nohand/link_base"/>
+        <body name="xarm7 nohand/link1" pos="0 0 0.26700000000000002">
+          <inertial pos="-0.00020000000000000001 0.029049999999999999 -0.012330000000000001" quat="0.97895299999999996 -0.202769 -0.0044161699999999996 -0.022726400000000001" mass="2.3820000000000001" diaginertia="0.00569127 0.0053338400000000003 0.0029386500000000001"/>
+          <joint name="xarm7 nohand/joint1" class="xarm7 nohand/size1"/>
+          <geom name="xarm7 nohand//unnamed_geom_1" mesh="xarm7 nohand/link1"/>
+          <body name="xarm7 nohand/link2" quat="1 -1 0 0">
+            <inertial pos="0.00022000000000000001 -0.12856000000000001 0.017350000000000001" quat="0.50197999999999998 0.86482999999999999 -0.00778841 0.0048328499999999996" mass="1.869" diaginertia="0.00959898 0.0093771700000000006 0.00201315"/>
+            <joint name="xarm7 nohand/joint2" class="xarm7 nohand/size1" range="-2.0590000000000002 2.0943999999999998"/>
+            <geom name="xarm7 nohand//unnamed_geom_2" mesh="xarm7 nohand/link2"/>
+            <body name="xarm7 nohand/link3" pos="0 -0.29299999999999998 0" quat="1 1 0 0">
+              <inertial pos="0.046600000000000003 -0.024629999999999999 -0.0076800000000000002" quat="0.91381900000000005 0.289775 0.28148099999999998 -0.041645500000000002" mass="1.6383000000000001" diaginertia="0.0035172100000000002 0.0029408899999999998 0.00195868"/>
+              <joint name="xarm7 nohand/joint3" class="xarm7 nohand/size2"/>
+              <geom name="xarm7 nohand//unnamed_geom_3" mesh="xarm7 nohand/link3"/>
+              <body name="xarm7 nohand/link4" pos="0.052499999999999998 0 0" quat="1 1 0 0">
+                <inertial pos="0.070470000000000005 -0.11575000000000001 0.012" quat="0.42210799999999998 0.85202599999999995 -0.126025 0.28283199999999997" mass="1.7269000000000001" diaginertia="0.00657137 0.0064794800000000001 0.0018676299999999999"/>
+                <joint name="xarm7 nohand/joint4" class="xarm7 nohand/size2" range="-0.19198000000000001 3.927"/>
+                <geom name="xarm7 nohand//unnamed_geom_4" mesh="xarm7 nohand/link4"/>
+                <body name="xarm7 nohand/link5" pos="0.077499999999999999 -0.34250000000000003 0" quat="1 1 0 0">
+                  <inertial pos="-0.00032000000000000003 0.016039999999999999 -0.025999999999999999" quat="0.99931099999999995 -0.030445699999999999 0.00057706700000000001 0.0212082" mass="1.3203" diaginertia="0.0053472900000000002 0.0049907600000000003 0.0013489000000000001"/>
+                  <joint name="xarm7 nohand/joint5" class="xarm7 nohand/size2"/>
+                  <geom name="xarm7 nohand//unnamed_geom_5" mesh="xarm7 nohand/link5"/>
+                  <body name="xarm7 nohand/link6" quat="1 1 0 0">
+                    <inertial pos="0.064689999999999998 0.032779999999999997 0.021409999999999998" quat="-0.217672 0.77241899999999997 0.16258 0.57406900000000005" mass="1.325" diaginertia="0.0024542100000000001 0.00221646 0.00107273"/>
+                    <joint name="xarm7 nohand/joint6" class="xarm7 nohand/size3" range="-1.6929700000000001 3.1415899999999999"/>
+                    <geom name="xarm7 nohand//unnamed_geom_6" mesh="xarm7 nohand/link6"/>
+                    <body name="xarm7 nohand/link7" pos="0.075999999999999998 0.097000000000000003 0" quat="1 -1 0 0">
+                      <inertial pos="0 -0.00677 -0.01098" quat="0.48761199999999999 0.51208799999999999 -0.51208799999999999 0.48761199999999999" mass="0.17000000000000001" diaginertia="0.00013217599999999999 9.2999999999999997e-05 5.8523600000000003e-05"/>
+                      <joint name="xarm7 nohand/joint7" class="xarm7 nohand/size3"/>
+                      <geom name="xarm7 nohand//unnamed_geom_7" material="xarm7 nohand/gray" mesh="xarm7 nohand/end_tool"/>
+                      <site name="xarm7 nohand/attachment_site"/>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <general name="xarm7 nohand/act1" class="xarm7 nohand/size1" joint="xarm7 nohand/joint1"/>
+    <general name="xarm7 nohand/act2" class="xarm7 nohand/size1" ctrlrange="-2.0590000000000002 2.0943999999999998" joint="xarm7 nohand/joint2"/>
+    <general name="xarm7 nohand/act3" class="xarm7 nohand/size2" joint="xarm7 nohand/joint3"/>
+    <general name="xarm7 nohand/act4" class="xarm7 nohand/size2" ctrlrange="-0.19198000000000001 3.927" joint="xarm7 nohand/joint4"/>
+    <general name="xarm7 nohand/act5" class="xarm7 nohand/size2" joint="xarm7 nohand/joint5"/>
+    <general name="xarm7 nohand/act6" class="xarm7 nohand/size3" ctrlrange="-1.6929700000000001 3.1415899999999999" joint="xarm7 nohand/joint6"/>
+    <general name="xarm7 nohand/act7" class="xarm7 nohand/size3" joint="xarm7 nohand/joint7"/>
+  </actuator>
+  <keyframe>
+    <key name="xarm7 nohand/home" qpos="0 -0.247 0 0.90900000000000003 0 1.1564399999999999 0" ctrl="0 -0.247 0 0.90900000000000003 0 1.1564399999999999 0"/>
+  </keyframe>
+</mujoco>
